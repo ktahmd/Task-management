@@ -1,5 +1,6 @@
 # .gitattributes
 *.php linguist-language=PHP
 *.hh linguist-language=C++
-.css linguist-language=CSS
-.js linguist-language=JS
+*.css linguist-language=CSS
+*.js linguist-language=JS
+*.sql linguist-language=SQL
