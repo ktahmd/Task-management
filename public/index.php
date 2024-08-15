@@ -10,7 +10,7 @@
     <header>
         <nav>
             <ul>
-                <li><a href='app/view/GUI_Bord/Bord.php'><b>Accueil</b></a></li>
+                <li><a href='app/view/dashbord/Bord.php'><b>Accueil</b></a></li>
                 
             </ul>
         </nav>
