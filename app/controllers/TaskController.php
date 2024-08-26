@@ -17,12 +17,11 @@ class TaskController {
             $description = isset($_POST['desc']) ? htmlspecialchars($_POST['desc'], ENT_QUOTES, 'UTF-8') : null;
             $dueDate = isset($_POST['due_date']) ? htmlspecialchars($_POST['due_date'], ENT_QUOTES, 'UTF-8') : null;
             $priority = isset($_POST['priority']) ? htmlspecialchars($_POST['priority'], ENT_QUOTES, 'UTF-8') : null;
-            $status = isset($_POST['status']) ? htmlspecialchars($_POST['status'], ENT_QUOTES, 'UTF-8') : null;
             $projectId = isset($_POST['project_id']) ? (int)$_POST['project_id'] : null;
 
-            if ($title && $priority && $status && $projectId) {
+            if ($title && $priority && $projectId) {
                 try {
-                    $this->taskModel->create($title, $description, $dueDate, $priority, $status, $projectId);
+                    $this->taskModel->create($title, $description, $dueDate, $priority,'todo', $projectId);
                     $_SESSION['msg_type'] = "success";
                     $_SESSION['msg'] = "Task created successfully!";
                 } catch (Exception $e) {
@@ -38,7 +37,7 @@ class TaskController {
             $_SESSION['msg'] = "Invalid request method!";
         }
         
-        header("Location: ../view/task/task_list.php");
+        header("Location: ../../Project-$projectId");
         exit();
     }
 
@@ -58,15 +57,15 @@ class TaskController {
         }
     }
 
-    // Handle fetching all tasks for a specific project
-    public function getByProjectId($projectId) {
-        if ($projectId) {
-            $tasks = $this->taskModel->getByProject($projectId);
-            $_SESSION['tasks'] = $tasks;
-        } else {
-            echo "Project ID is required!";
-        }
-    }
+    // // Handle fetching all tasks for a specific project
+    // public function getByProjectId($projectId) {
+    //     if ($projectId) {
+    //         $tasks = $this->taskModel->getByProject($projectId);
+    //         $_SESSION['tasks'] = $tasks;
+    //     } else {
+    //         echo "Project ID is required!";
+    //     }
+    // }
 
     // Handle updating a task
     public function update() {
@@ -126,7 +125,18 @@ class TaskController {
         header("Location: ../view/task/task_list.php");
         exit();
     }
+    public function viewProject($id) {
+        $projectId = isset($_POST['project_id']) ? (int)$_POST['project_id'] : null;
+        $tasks = $this->taskModel->getByProject($id);
+        $_SESSION['tasks'] = $tasks;
+        
+        
+            
+        
+    }
 }
+
+
 
 // Initialize the controller and handle the request based on the action
 $controller = new TaskController($db);
@@ -147,7 +157,7 @@ switch ($action) {
         $controller->delete();
         break;
     default:
-        echo 'what?';
+        $controller->viewProject($id);
         break;
 }
 

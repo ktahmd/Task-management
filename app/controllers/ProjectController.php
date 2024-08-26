@@ -69,33 +69,7 @@ class ProjectController {
         header("Location: ../../MyProject");
         exit();
     }
-    public function open() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $projectId = isset($_POST['project_id']) ? (int)$_POST['project_id'] : null;
-            $ownerId = isset($_POST['owner_id']) ? (int)$_POST['owner_id'] : null;
-            if ($_SESSION['user_id']==$ownerId) {
-                $_SESSION['openproject'] = $projectId;
-                header("Location: ../view/task/tasks.php");
-                exit();
-            }
-            else{
-                header("Location: ../view/error/Oops.php");
-                exit();
-            }
-        } else {
-            echo "error";
-        }
-    }
-    public function viewProject($id) {
-        $project = $this->projectModel->getById($id);
-        if ($project) {
-            $taskModel = new Task($this->projectModel->db);
-            $tasks = $taskModel->getByProject($id);
-            include __DIR__ . '/../view/project/project.php';  // Pass data to the view
-        } else {
-            echo "Project not found!";
-        }
-    }
+
     public function delete() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $projectId = isset($_POST['project_id']) ? (int)$_POST['project_id'] : null;
@@ -131,21 +105,6 @@ class ProjectController {
     
     
 
-    // Handle fetching a project by ID
-    public function getById() {
-        $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
-
-        if ($id) {
-            $project = $this->projectModel->getById($id);
-            if ($project) {
-                echo json_encode($project, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
-            } else {
-                echo "Project not found!";
-            }
-        } else {
-            echo "ID is required!";
-        }
-    }
 
     // Handle fetching all projects
     public function getAll() {
@@ -154,7 +113,7 @@ class ProjectController {
             $myprojects = $this->projectModel->getByUserId($userId);
             $_SESSION['projects'] = $myprojects;
         } else {
-            header("Location: ../../..");
+            header("Location: Home");
             exit();
         }
     }
@@ -168,9 +127,6 @@ $action = isset($_POST['action']) ? htmlspecialchars($_POST['action'], ENT_QUOTE
 switch ($action) {
     case 'create':
         $controller->create();
-        break;
-    case 'getById':
-        $controller->getById();
         break;
     case 'update':
         $controller->update();

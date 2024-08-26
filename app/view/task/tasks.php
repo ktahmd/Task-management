@@ -1,12 +1,15 @@
 <?php
 session_start();
-include_once __DIR__ . '/../../controllers/ProjectController.php';
+include __DIR__ . '/../../controllers/TaskController.php';
 $title = 'Nom Project';
 ob_start(); /*start buffering the output*/
+
 ?>
 
 <div class="row">
     <h4 class="MERGE20">MY PROJECTS / PROJECT NAME<hr><br></h4>
+    <!-- Alerts -->
+    <?php include __DIR__ . '/../Alerts/Alerts.php'; ?>
     <!-- tab buttons -->
     <div class="tab">
             <button class="tablinks active" onclick="openTab(event, 'London')">
@@ -25,7 +28,9 @@ ob_start(); /*start buffering the output*/
     <div class="card">
         <div class="row">
             <div class="column-50">
-            <button class="btn default" type="submit"> New Task</button>
+            <button class="btn default" onclick="openModa('addtask')" > New Task</button>
+            <!-- The Modal Add -->
+            <?php require_once __DIR__ . '/addTask.php'; ?>
             </div>
             <div class="column-50">
                 <input type="text" id="myInput" onkeyup="Tabsearch()" placeholder="Search for names..">
@@ -43,110 +48,18 @@ ob_start(); /*start buffering the output*/
                     <th>Create at</th>
                     <th>State</th>
                 </tr>
+                <?php $tasks=$_SESSION['tasks'];?>
+                <?php foreach ($tasks as $task): ?>
                 <tr>
-                    <td>Germany</td>
-                    <td class="greyText">Alfreds Futterkiste</td>
-                    <td style="color: red;">Hight</td>
-                    <td>None</td>
-                    <td>10/08/2024</td>
-                    <td>done</td>
+                    <td><?php echo htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8'); ?> </td>
+                    <td class="greyText"><?php echo htmlspecialchars($task['description'], ENT_QUOTES, 'UTF-8'); ?> </td>
+                    <td style="color: red;"><?php echo htmlspecialchars($task['priority'], ENT_QUOTES, 'UTF-8'); ?> </td>
+                    <td><?php echo htmlspecialchars($task['project_id'], ENT_QUOTES, 'UTF-8'); ?> </td>
+                    <td><?php echo htmlspecialchars($task['due_date'], ENT_QUOTES, 'UTF-8'); ?> </td>
+                    <td><?php echo htmlspecialchars($task['status'], ENT_QUOTES, 'UTF-8'); ?> </td>
                 </tr>
-                <tr>
-                    <td>Germany</td>
-                    <td class="greyText">Alfreds Futterkiste</td>
-                    <td style="color: red;">Hight</td>
-                    <td>None</td>
-                    <td>10/08/2024</td>
-                    <td>done</td>
-                </tr>
-                <tr>
-                    <td>Germany</td>
-                    <td class="greyText">Alfreds Futterkiste</td>
-                    <td style="color: red;">Hight</td>
-                    <td>None</td>
-                    <td>10/08/2024</td>
-                    <td>done</td>
-                </tr>
-                <tr>
-                    <td>Germany</td>
-                    <td class="greyText">Alfreds Futterkiste</td>
-                    <td style="color: red;">Hight</td>
-                    <td>None</td>
-                    <td>10/08/2024</td>
-                    <td>done</td>
-                </tr>
-                <tr>
-                    <td>Germany</td>
-                    <td class="greyText">Alfreds Futterkiste</td>
-                    <td style="color: red;">Hight</td>
-                    <td>None</td>
-                    <td>10/08/2024</td>
-                    <td>done</td>
-                </tr>
-                <tr>
-                    <td>Germany</td>
-                    <td class="greyText">Alfreds Futterkiste</td>
-                    <td style="color: red;">Hight</td>
-                    <td>None</td>
-                    <td>10/08/2024</td>
-                    <td>done</td>
-                </tr>
-                <tr>
-                    <td>Germany</td>
-                    <td class="greyText">Alfreds Futterkiste</td>
-                    <td style="color: red;">Hight</td>
-                    <td>None</td>
-                    <td>10/08/2024</td>
-                    <td>done</td>
-                </tr>
-                <tr>
-                    <td>Germany</td>
-                    <td class="greyText">Alfreds Futterkiste</td>
-                    <td style="color: red;">Hight</td>
-                    <td>None</td>
-                    <td>10/08/2024</td>
-                    <td>done</td>
-                </tr>
-                <tr>
-                    <td>Germany</td>
-                    <td class="greyText">Alfreds Futterkiste</td>
-                    <td style="color: red;">Hight</td>
-                    <td>None</td>
-                    <td>10/08/2024</td>
-                    <td>done</td>
-                </tr>
-                <tr>
-                    <td>Germany</td>
-                    <td class="greyText">Alfreds Futterkiste</td>
-                    <td style="color: red;">Hight</td>
-                    <td>None</td>
-                    <td>10/08/2024</td>
-                    <td>done</td>
-                </tr>
-                <tr>
-                    <td>Germany</td>
-                    <td class="greyText">Alfreds Futterkiste</td>
-                    <td style="color: red;">Hight</td>
-                    <td>None</td>
-                    <td>10/08/2024</td>
-                    <td>done</td>
-                </tr>
-                <tr>
-                    <td>Germany</td>
-                    <td class="greyText">Alfreds Futterkiste</td>
-                    <td style="color: red;">Hight</td>
-                    <td>None</td>
-                    <td>10/08/2024</td>
-                    <td>done</td>
-                </tr>
-                <tr>
-                    <td>Germany</td>
-                    <td class="greyText">Alfreds Futterkiste</td>
-                    <td style="color: red;">Hight</td>
-                    <td>None</td>
-                    <td>10/08/2024</td>
-                    <td>done</td>
-                </tr>
+                <?php endforeach; 
+                    ?>
                 </table>
             </div>
 
@@ -155,14 +68,36 @@ ob_start(); /*start buffering the output*/
                 <div class="board">
                     <div class="column" id="todo">
                         <h2>To Do</h2>
-                        <div class="task" draggable="true">Task 1</div>
-                        <div class="task" draggable="true">Task 2</div>
+                        <?php $tasks=$_SESSION['tasks'];?>
+                        <?php foreach ($tasks as $task): ?>
+                            <?php if($task['status']=='todo'):?>
+                        <div class="task" draggable="true"><?php echo htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8'); ?></div>
+                        <?php endif; ?>
+                        <?php endforeach; 
+                        
+                        ?>
                     </div>
                     <div class="column" id="inProcess">
                         <h2>In Process</h2>
+                        <?php $tasks=$_SESSION['tasks'];?>
+                        <?php foreach ($tasks as $task): ?>
+                            <?php if($task['status']=='progress'):?>
+                        <div class="task" draggable="true"><?php echo htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8'); ?></div>
+                        <?php endif; ?>
+                        <?php endforeach; 
+                        
+                        ?>
                     </div>
                     <div class="column" id="done">
                         <h2>Done</h2>
+                        <?php $tasks=$_SESSION['tasks'];?>
+                        <?php foreach ($tasks as $task): ?>
+                            <?php if($task['status']=='completed'):?>
+                        <div class="task" draggable="true"><?php echo htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8'); ?></div>
+                        <?php endif; ?>
+                        <?php endforeach; 
+                        unset($_SESSION['tasks']);
+                        ?>
                     </div>
                 </div>
             </div>
@@ -179,5 +114,5 @@ ob_start(); /*start buffering the output*/
 
 <?php
 $content = ob_get_clean(); /*captured in the buffer and the buffer is cleared.*/
-include '../layouts/master.php';
+require_once '../app/view/layouts/master.php';
 ?>

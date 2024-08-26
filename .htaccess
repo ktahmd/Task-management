@@ -1,4 +1,8 @@
 RewriteEngine On
+# Set the base URL
+RewriteBase /i/TASKY/
+
+# Redirect all requests to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ public/index.php?url=$1 [L,QSA]

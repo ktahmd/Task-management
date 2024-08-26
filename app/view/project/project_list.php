@@ -33,10 +33,9 @@ ob_start(); /*start buffering the output*/
                         
                         <div class="row">
                             <div class="column-25">
-                            <form  action="../../controllers/ProjectController.php" method="post">
+                            <form  action="Project-<?php echo htmlspecialchars($project['id'], ENT_QUOTES, 'UTF-8'); ?>" method="post">
                             <input type="hidden" name="owner_id" value="<?php echo htmlspecialchars($_SESSION['user_id'], ENT_QUOTES, 'UTF-8'); ?>">
                             <input type="hidden" name="project_id" value="<?php echo htmlspecialchars($project['id'], ENT_QUOTES, 'UTF-8'); ?>">
-                            <input type="hidden" name="action" value="open">
                             <button type="submit" class="btn noni">
                                 <?php echo htmlspecialchars($project['name'], ENT_QUOTES, 'UTF-8'); ?> 
                             </button>

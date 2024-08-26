@@ -11,7 +11,7 @@ class Task {
     // Insert a new task
     public function create($title, $description, $dueDate, $priority, $status, $projectId) {
         $stmt = $this->db->prepare("INSERT INTO tasks (title, description, due_date, priority, status, project_id) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssis", $title, $description, $dueDate, $priority, $status, $projectId);
+        $stmt->bind_param("sssssi", $title, $description, $dueDate, $priority, $status, $projectId);
         
         if ($stmt->execute()) {
             return true;
