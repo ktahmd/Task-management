@@ -1,0 +1,56 @@
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  height: 30px;
+  margin-left: 24px;
+  padding-top: 5px;
+  padding-left: 5px;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.16);
+    background-color: #ededed;
+    border-radius: 30% 30% 0% 0%;
+    margin-right: 5px;
+    height: 30px;
+    width: 10%;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.3s;
+    font-size: 12px;
+    color: black;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ffffff;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  overflow: auto;
+  height: 300px;
+}
+
+
+@media screen and (max-width: 400px) {
+    .tab button {
+        width: 25%;
+    }
+    .tabcontent {
+        width: 100%;
+      }
+  }
+

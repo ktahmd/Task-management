@@ -6,3 +6,4 @@
         <a href="#">Clients</a>
         <a href="#">Contact</a>
     </div>
+    <span style="font-size:15px;cursor:pointer" onclick="openNav()">&#9776;</span>

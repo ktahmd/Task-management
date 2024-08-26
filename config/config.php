@@ -1,5 +1,7 @@
 <?php
-class MySQLException extends Exception {}
+if (!class_exists('MySQLException')) {
+    class MySQLException extends Exception {}
+}
 
 $servername = "localhost";
 $username = "root";

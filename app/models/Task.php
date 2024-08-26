@@ -1,5 +1,5 @@
 <?php
-include(dirname(__DIR__, 2) . '/config/config.php');
+require_once __DIR__ . '/../../config/config.php';
 
 class Task {
     private $db;
@@ -40,14 +40,17 @@ class Task {
 
     // Get all tasks for a specific project
     public function getByProject($projectId) {
-        $stmt = $this->db->prepare("SELECT * FROM tasks WHERE project_id = ?");
-        $stmt->bind_param("i", $projectId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        
-        return $result->fetch_all(MYSQLI_ASSOC);
-        
-        $stmt->close();
+        $query = "SELECT * FROM tasks WHERE project_id = ?";
+        if ($stmt = $this->db->prepare($query)) {
+            $stmt->bind_param('i', $projectId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $tasks = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+            return $tasks;
+        } else {
+            throw new Exception("Failed to prepare statement: " . $this->db->error);
+        }
     }
 
     // Update a task

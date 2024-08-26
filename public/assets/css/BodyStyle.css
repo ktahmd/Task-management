@@ -1,5 +1,3 @@
-
-  
 * {
     box-sizing: border-box;
   }
@@ -27,25 +25,28 @@
     font-size: 50px;
     text-align: left;
   }
-  
-  
-  
-  
-  /* Column container */
-  .row {  
-    display: -ms-flexbox; /* IE10 */
-    display: flex;
-    -ms-flex-wrap: wrap; /* IE10 */
-    flex-wrap: wrap;
-  }
-  
-  
+    /* Add responsiveness - make the columns appear on top of each other instead of next to each other on small screens */
+    @media screen and (max-width: 1000px) {
+    .header {
+        padding-top: 50px;
+        padding-left: 20px;
+        padding-bottom: 20px;
+        background-size: cover;
+        background-position: center;  
+    }
+    .header h1 {
+        font-size: 100%;
+    }
+    }
+
   /* Main column */
   .main {   
     -ms-flex: 70%; /* IE10 */
     flex: 70%;
     background-color: white;
     padding: 20px;
+    height: 700px;
+    
   }
   
   /* Fake image, just for this example */
@@ -57,17 +58,35 @@
   
   /* Footer */
   .footer {
+    box-shadow: 0px -2px 16px #00000026;
     padding: 20px;
     text-align: center;
-    background: #ddd;
+    background-color: #f9f9f9;
+    margin-top: 100px;
+  }
+  .footer a {
+    color: #000000; /* Link color */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Each link on a new line */
+    margin: 5px 0; /* Space between links */
+    font-family:'Afacad';font-size: 16px;;
   }
   
-  /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
-  @media screen and (max-width: 700px) {
-    .row {   
-      flex-direction: column;
-    }
+  .footer a:hover {
+    color: #03a2b7; /* Hover color */
+    text-decoration: underline; /* Underline on hover */
   }
+
+  .footer img{
+    align-items: left;
+  }
+
+  .footer2 {
+    padding: 1px;
+    text-align: center;
+    background: #5ECAC9;
+  }
+
   
   /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
   @media screen and (max-width: 400px) {
@@ -76,4 +95,34 @@
       width: 100%;
     }
   }
+
   
+  .greyText{
+    color:#787676;
+   }
+
+  .ForceCenter{
+    align-items: center;
+    text-align: center;
+   }
+
+   .MERGE20{
+    padding: 20px 20px 10px 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+   }
+
+
+  /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+  @media screen and (max-width: 400px) {
+    .ForceCenter{
+      display: flex;
+      flex-direction: column; /* Stack items vertically */
+      align-items: center;    /* Center items horizontally */
+      gap: 10px;
+     }
+     .ForceCenter img{
+      width: 50%;
+     }
+  }
+

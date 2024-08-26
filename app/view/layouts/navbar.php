@@ -1,6 +1,12 @@
 <div id="navbar">
-    <span style="font-size:15px;cursor:pointer" onclick="openNav()">&#9776;</span>
-    <a href="javascript:void(0)">Home</a>
-    <a href="javascript:void(0)">News</a>
-    <a href="javascript:void(0)">Contact</a>
+    <a href="javascript:void(0);" class="icon" onclick="OpenNav()">
+        <i class="fa fa-bars"></i>
+    </a>
+    <a href="Home" class="active"><img alt="TaskyLogo" src="public/assets/img/logotaskywhite.png" width="80px" align="left" ></a>
+    <div id="myLinks">
+    <img src="public/assets/img/avatar.png" alt="Avatar" class="avatar" " align="right">
+    <a href="Dashbord">Dashbord</a>
+    <a href="MyProject">My Project</a>
+    </div>
 </div>
+

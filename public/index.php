@@ -1,23 +1,23 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formation en ligne</title>
+<?php
+// index.php
 
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href='app/view/dashbord/Bord.php'><b>Accueil</b></a></li>
-                
-            </ul>
-        </nav>
-    </header>
-    <main >
-    <footer>
-        <p>&copy; 2024 développé par KD.</p>
-    </footer>
-</body>
-</html>
+// Get the URL from the query parameter
+$url = isset($_GET['url']) ? $_GET['url'] : '/';
+
+// Define routes
+$routes = [
+    'Home' => '../app/view/Home',
+    '/' => '../app/view/Home',
+    'MyProject' => '../app/view/project/project_list',
+    'Dashbord' => '../app/view/dashbord/Bord'
+];
+
+// Route handling
+if (array_key_exists($url, $routes)) {
+    $page = $routes[$url];
+} else {
+    $page = '404'; // Default to a 404 page
+}
+
+// Include the corresponding page
+require_once "$page.php";

@@ -1,0 +1,71 @@
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+.leftcolumn75 {   
+    float: left;
+    width: 75%;
+  }
+  .leftcolumn75 h4{
+    margin: 20px;
+  }
+  
+
+  /* Right column */
+.rightcolumn25 {
+    float: left;
+    width: 25%;
+    padding-left: 20px;
+  }
+    /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 700px) {
+      .row {   
+        flex-direction: column;
+      }
+    }
+
+
+    /* Add responsiveness - make the columns appear on top of each other instead of next to each other on small screens */
+    @media screen and (max-width: 1000px) {
+        .leftcolumn75,
+        .rightcolumn25 {
+          width: 100%;
+          text-align: center;
+          padding-left: 0px;
+        }
+      }
+
+.column-25 {
+    float: left;
+    width: 25%;
+  }
+
+  /* 2/3 column */
+.column-66 {
+    float: left;
+    width: 66.66666%;
+    padding: 20px;
+  }
+  
+  /* 1/3 column */
+  .column-33 {
+    float: left;
+    width: 33.33333%;
+    padding: 20px;
+  }
+  .column-50 {
+    float: left;
+    width: 50%;
+  }
+  
+  /* Add responsiveness - make the columns appear on top of each other instead of next to each other on small screens */
+  @media screen and (max-width: 1000px) {
+    .column-66,
+    .column-33 {
+      width: 100%;
+      text-align: center;
+    }
+  }

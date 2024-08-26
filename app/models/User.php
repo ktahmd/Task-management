@@ -1,5 +1,5 @@
 <?php
-include(dirname(__DIR__, 2) . '/config/config.php');
+require_once __DIR__ . '/../../config/config.php';
 
 class User {
     private $db;
@@ -48,5 +48,18 @@ class User {
         
         $stmt->close();
     }
+    public function getByEmail($email) {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
+    }
+
 }
 ?>
