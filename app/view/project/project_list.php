@@ -3,10 +3,6 @@ session_start();
 include_once __DIR__ . '/../../controllers/ProjectController.php';
 $title = 'My Projects';
 ob_start(); /*start buffering the output*/
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../..");
-    exit();
-}
 ?>
 <div class="row">
     <h4 class="MERGE20">MY PROJECTS<hr><br></h4>

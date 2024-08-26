@@ -3,10 +3,7 @@ session_start();
 include_once __DIR__ . '/../../controllers/ProjectController.php';
 $title = 'Dashbord';
 ob_start(); /*start buffering the output*/
-if (!isset($_SESSION['user_id'])) {
-    header("Location: home");
-    exit();
-}
+
 
 
 echo "Bienvenue, " . htmlspecialchars($_SESSION['email'], ENT_QUOTES, 'UTF-8') . "!";

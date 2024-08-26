@@ -38,7 +38,7 @@ class ProjectController {
             $_SESSION['msg'] = "Invalid request method!";
         }
         
-        header("Location: ../../Myproject");
+        header("Location: ../../MyProject");
         exit();
     }
     public function update() {
@@ -66,7 +66,7 @@ class ProjectController {
             $_SESSION['msg'] = "Invalid request method!";
         }
     
-        header("Location: ../../Myproject");
+        header("Location: ../../MyProject");
         exit();
     }
     public function open() {
@@ -125,7 +125,7 @@ class ProjectController {
             $_SESSION['msg'] = "Invalid request method!";
         }
     
-        header("Location: ../../Myproject");
+        header("Location: ../../MyProject");
         exit();
     }
     

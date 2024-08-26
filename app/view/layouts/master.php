@@ -31,6 +31,10 @@
 
 </head>
 <body>
+    <?php if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../../");
+    
+    }?>
     
     <!-- Header -->
     <?php include 'header.php'; ?>

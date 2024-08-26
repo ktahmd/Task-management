@@ -1,5 +1,5 @@
 <?php
-include(dirname(__DIR__, 2) . '\config\config.php');
+require_once __DIR__ . '/../../config/config.php';
 
 
 class Collaboration {
