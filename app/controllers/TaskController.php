@@ -70,16 +70,17 @@ class TaskController {
     // Handle updating a task
     public function update() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id = isset($_POST['id']) ? (int)$_POST['id'] : null;
+            $projectId = isset($_POST['project_id']) ? (int)$_POST['project_id'] : null;
+            $taskId = isset($_POST['task_id']) ? (int)$_POST['task_id'] : null;
             $title = isset($_POST['title']) ? htmlspecialchars($_POST['title'], ENT_QUOTES, 'UTF-8') : null;
             $description = isset($_POST['desc']) ? htmlspecialchars($_POST['desc'], ENT_QUOTES, 'UTF-8') : null;
             $dueDate = isset($_POST['due_date']) ? htmlspecialchars($_POST['due_date'], ENT_QUOTES, 'UTF-8') : null;
             $priority = isset($_POST['priority']) ? htmlspecialchars($_POST['priority'], ENT_QUOTES, 'UTF-8') : null;
             $status = isset($_POST['status']) ? htmlspecialchars($_POST['status'], ENT_QUOTES, 'UTF-8') : null;
 
-            if ($id && $title && $priority && $status) {
+            if ($taskId && $title && $priority && $status) {
                 try {
-                    $this->taskModel->update($id, $title, $description, $dueDate, $priority, $status);
+                    $this->taskModel->update($taskId, $title, $description, $dueDate, $priority, $status);
                     $_SESSION['msg_type'] = "success";
                     $_SESSION['msg'] = "Task updated successfully!";
                 } catch (Exception $e) {
@@ -95,18 +96,19 @@ class TaskController {
             $_SESSION['msg'] = "Invalid request method!";
         }
 
-        header("Location: ../view/task/tasks.php");
+        header("Location: ../../Project-$projectId");
         exit();
     }
 
     // Handle deleting a task
     public function delete() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id = isset($_POST['id']) ? (int)$_POST['id'] : null;
+            $taskId = isset($_POST['task_id']) ? (int)$_POST['task_id'] : null;
+            $projectId = isset($_POST['project_id']) ? (int)$_POST['project_id'] : null;
 
-            if ($id) {
+            if ($taskId) {
                 try {
-                    $this->taskModel->delete($id);
+                    $this->taskModel->delete($taskId);
                     $_SESSION['msg_type'] = "success";
                     $_SESSION['msg'] = "Task deleted successfully!";
                 } catch (Exception $e) {
@@ -122,7 +124,7 @@ class TaskController {
             $_SESSION['msg'] = "Invalid request method!";
         }
 
-        header("Location: ../view/task/task_list.php");
+        header("Location: ../../Project-$projectId");
         exit();
     }
     public function viewProject($id) {
