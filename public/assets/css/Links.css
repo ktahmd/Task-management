@@ -1,0 +1,6 @@
+.Links {
+    color: #000000; /* Link color */
+    text-decoration: none; /* Remove underline */
+    margin: 5px 0; /* Space between links */
+    font-size: 16px;
+  }

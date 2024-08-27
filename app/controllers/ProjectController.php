@@ -3,6 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start(); // Start the session if it's not already started
 }
 require_once __DIR__ . '/../models/Project.php';
+require_once __DIR__ . '/../models/Task.php';
 require_once __DIR__ . '/../../config/config.php';
 
 class ProjectController {
@@ -77,6 +78,12 @@ class ProjectController {
             if ($_SESSION['user_id']==$ownerId) {
                 if ($projectId) {
                     try {
+                        global $db;
+                        $T=new Task($db);
+                        $tasks=$T->getByProject($projectId);
+                        foreach($tasks as $task){
+                            $T->delete($task['id']);
+                        }
                         $this->projectModel->delete($projectId);
                         $_SESSION['msg_type'] = "success";
                         $_SESSION['msg'] = "Project deleted successfully!";
@@ -112,6 +119,30 @@ class ProjectController {
             $userId = $_SESSION['user_id'];
             $myprojects = $this->projectModel->getByUserId($userId);
             $_SESSION['projects'] = $myprojects;
+            
+            global $db;
+            $T = new Task($db);
+
+            $totals = [];
+            $countings = [];
+            $percentages = [];
+
+            foreach ($myprojects as $project) {
+                $projectId = $project['id'];
+
+                // Stocker les totaux et les comptes pour chaque projet dans des tableaux associatifs
+                $totals[$projectId] = $T->Allconting($projectId);
+                $countings[$projectId] = $T->counting($projectId);
+                
+                if ($countings[$projectId] > 0) {
+                    $percentages[$projectId] = ($countings[$projectId] * 100) / $totals[$projectId];
+                } else {
+                    $percentages[$projectId] = 0; // ou une autre valeur par défaut
+                }
+            }
+            $_SESSION['p']=$percentages;
+            
+            
         } else {
             header("Location: Home");
             exit();

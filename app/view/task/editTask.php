@@ -41,8 +41,8 @@
       <br><br>
 
       
-      <input type="text" id="project_id" name="project_id" value="<?php echo $id;?>">
-      <input type="text" id="task_id" name="task_id" value="<?php echo htmlspecialchars($task['id'], ENT_QUOTES, 'UTF-8'); ?>">
+      <input type="hidden" id="project_id" name="project_id" value="<?php echo $id;?>">
+      <input type="hidden" id="task_id" name="task_id" value="<?php echo htmlspecialchars($task['id'], ENT_QUOTES, 'UTF-8'); ?>">
       <br><br>
 
       <button type="submit" class="btn default">Create Task</button>

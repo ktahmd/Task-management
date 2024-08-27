@@ -4,11 +4,8 @@ include_once __DIR__ . '/../../controllers/ProjectController.php';
 $title = 'Dashbord';
 ob_start(); /*start buffering the output*/
 
-
-
-echo "Bienvenue, " . htmlspecialchars($_SESSION['email'], ENT_QUOTES, 'UTF-8') . "!";
 ?>
-<a href="app/controllers/logout.php">Déconnexion</a>
+
 <div class="row">
   <div class="leftcolumn75">
     <h4>DASHBORD<hr><br></h4>

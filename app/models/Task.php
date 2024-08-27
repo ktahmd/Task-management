@@ -80,5 +80,45 @@ class Task {
         
         $stmt->close();
     }
+    public function counting($id) {
+        $status = 'completed';
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM tasks WHERE project_id = ? AND status = ?");
+        
+        if ($stmt === false) {
+            throw new MySQLException("Erreur lors de la préparation de la requête : " . $this->db->error);
+        }
+    
+        $stmt->bind_param("is", $id, $status);
+        $count=0;
+        if ($stmt->execute()) {
+            $stmt->bind_result($count);
+            $stmt->fetch();
+            $stmt->close();
+            return $count;
+        } else {
+            $stmt->close();
+            throw new MySQLException("Erreur lors de l'exécution de la requête : " . $stmt->error);
+        }
+    }
+    
+    public function Allconting($id) {
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM tasks WHERE project_id = ?");
+        if ($stmt === false) {
+            throw new MySQLException("Erreur lors de la préparation de la requête : " . $this->db->error);
+        }
+    
+        $stmt->bind_param("i", $id);
+        $count=1;
+        if ($stmt->execute()) {
+            $stmt->bind_result($count);
+            $stmt->fetch();
+            $stmt->close();
+            return $count;
+        } else {
+            $stmt->close();
+            throw new MySQLException("Erreur lors de l'exécution de la requête : " . $stmt->error);
+        }
+    }
+    
 }
 ?>

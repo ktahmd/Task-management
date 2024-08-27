@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="public/assets/css/Modal.css">
     <link rel="stylesheet" href="public/assets/css/Form.css">
     <link rel="stylesheet" href="public/assets/css/Alerts.css">
+    <link rel="stylesheet" href="public/assets/css/Links.css">
+    <link rel="stylesheet" href="public/assets/css/Error404.css">
+    <link rel="stylesheet" href="public/assets/css/Drop.css">
 
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
@@ -32,8 +35,8 @@
 </head>
 <body>
     <?php if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../../");
-    
+    header("Location: Home");
+    exit();
     }?>
     
     <!-- Header -->
@@ -57,6 +60,7 @@
     <script src="public/assets/js/Tab.js"></script>
     <script src="public/assets/js/TableSearch.js"></script>
     <script src="public/assets/js/DragDrop.js"></script>
+    <script src="public/assets/js/Drop.js"></script>
 
     
 

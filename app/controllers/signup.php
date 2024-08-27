@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(); // Start the session if it's not already started
+}
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../../config/config.php';
 

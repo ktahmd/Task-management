@@ -1,94 +1,91 @@
+#navbar {
+  overflow: visible;
+  background-color: #5ECAC9;
+  display: flex;             /* Use flexbox for alignment */
+  align-items: center;       /* Center elements vertically */
+  justify-content: space-between; /* Space between the elements */
+  padding: 0 20px;           /* Add padding to the sides */
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+#navbar a.icon {
+  display: none;
+}
+
+#navbar a {
+  color: #34065C;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+#navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#navbar a.active {
+  background-color: #5ECAC9;
+  color: white;
+}
+
+#myLinks {
+  display: flex; 
+  flex: 1;  /* Take up remaining space */
+  justify-content: flex-start;  /* Align to the left */ 
+}
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 60px;
+}
+
+
+@media screen and (max-width: 500px) {
   #navbar {
-    overflow: hidden;
-    background-color: #5ECAC9;
+    text-align: left;
+    overflow: visible;
+    position: relative;
+  }
+  
+  #myLinks {
+    display: none ;
+
   }
   
   #navbar a {
-    float: left;
-    display: block;
-    color: #34065C;
-    text-align: center;
+    color: rgb(255, 255, 255);
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+    display: block;
   }
- 
+  #navbar a.active {
+    margin-left: 10px;
+  }
+  
+  #navbar a.icon {
+    background: #5ECAC9;
+    display: block;
+    position: absolute;
+    left: 0;
+    max-width: 50px;
+  }
+  
   #navbar a:hover {
     background-color: #ddd;
     color: black;
   }
-  #navbar a.icon {
-    display: none;
-  }
-  
-  #navbar a.active {
-    background-color: #5ECAC9;
-    color: white;
-  }
-  
-  #navbar span {
-    float: left;
-    display: block;
-    padding: 14px 16px;
-  }
-  #navbar span:hover {
-    background-color: #ddd;
-    color: black;
-  } 
-  
-  .content {
-    padding: 16px;
-  }
-  
-  .sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
-  
-  .sticky + .content {
-    padding-top: 60px;
-  }
 
-  @media screen and (max-width: 1000px) {
-    .mobile-container {
-      max-width: 480px;
-      margin: auto;
-      background-color: #555;
-      height: 500px;
-      color: white;
-      border-radius: 10px;
-    }
-    #navbar {
-      text-align: left;
-      overflow: hidden;
-      position: relative;
-    }
-    
-    #myLinks {
-      display: none;
-    }
-    
-    #navbar a {
-      color: rgb(255, 255, 255);
-      padding: 14px 16px;
-      text-decoration: none;
-      font-size: 17px;
-      display: block;
-    }
-    
-    #navbar a.icon {
-      background: #5ECAC9;
-      display: block;
-      position: absolute;
-      right: 0;
-      top: 0;
-      max-width: 50px;
-    }
-    
-    #navbar a:hover {
-      background-color: #ddd;
-      color: black;
-    }
-
-  }
+}

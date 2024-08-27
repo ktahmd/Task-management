@@ -1,13 +1,27 @@
 <?php
 session_start();
-include __DIR__ . '/../../controllers/TaskController.php';
+include_once __DIR__ . '/../../controllers/TaskController.php';
 $title = 'Nom Project';
 ob_start(); /*start buffering the output*/
+
+    if(isset( $_SESSION['project'])){
+        $project= $_SESSION['project'];
+        if($_SESSION['user_id']!=$project['owner_id']){
+            header("Location: 403");
+            exit();
+        }
+    }
+    else{
+        header("Location: 404");
+        exit();
+    }
+    
 
 ?>
 
 <div class="row">
-    <h4 class="MERGE20"><a herf=" " >MY PROJECTS / </a><hr><br></h4>
+    
+    <h4 class="MERGE20"><a href="MyProject" class="Links" >MY PROJECTS</a> / <?php echo htmlspecialchars($project['name'], ENT_QUOTES, 'UTF-8'); ?> <hr><br></h4>
     <!-- Alerts -->
     <?php include __DIR__ . '/../Alerts/Alerts.php'; ?>
     <!-- tab buttons -->
@@ -89,7 +103,7 @@ ob_start(); /*start buffering the output*/
                         <?php $tasks=$_SESSION['tasks'];?>
                         <?php foreach ($tasks as $task): ?>
                             <?php if($task['status']=='todo'):?>
-                        <div class="task" draggable="true"><?php echo htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8'); ?></div>
+                        <div class="task" ><?php echo htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8'); ?></div>
                         <?php endif; ?>
                         <?php endforeach; 
                         
@@ -100,7 +114,7 @@ ob_start(); /*start buffering the output*/
                         <?php $tasks=$_SESSION['tasks'];?>
                         <?php foreach ($tasks as $task): ?>
                             <?php if($task['status']=='progress'):?>
-                        <div class="task" draggable="true"><?php echo htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8'); ?></div>
+                        <div class="task" ><?php echo htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8'); ?></div>
                         <?php endif; ?>
                         <?php endforeach; 
                         
