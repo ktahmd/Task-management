@@ -1,7 +1,7 @@
 .avatar {
     width: 35px;
     height: 35px;
-    background-color: #1a2b4c;
+    background-color: #3a4850;
     color: white;
     border-radius: 50%;
     display: flex;
@@ -13,6 +13,7 @@
     margin-left: auto;
     
   }
+  
 
 
 

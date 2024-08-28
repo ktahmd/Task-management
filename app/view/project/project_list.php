@@ -70,12 +70,56 @@ ob_start(); /*start buffering the output*/
                             </div>
                         </div>
                     </div>
-                    </li>
+                        </li>
                     <?php endforeach; 
                     unset($_SESSION['projects']);
                     unset($_SESSION['p']);
                     ?>
                 </ul>
+                <?php if(isset($_SESSION['projectsC'])): ?>
+                    <ul id="myUL">
+                    <?php $myprojectsC=$_SESSION['projectsC'];?>
+                        <?php foreach ($myprojectsC as $project): ?>
+                            <!-- The Modal edit -->
+                            <?php require __DIR__ . '/editProject.php'; ?>
+                            <!-- The Modal delet -->
+                            <?php require __DIR__ . '/deleteProject.php'; ?>
+                            <li>
+                            <div id="box">
+                            
+                            <div class="row">
+                                <div class="column-25">
+                                <form  action="Project-<?php echo htmlspecialchars($project['id'], ENT_QUOTES, 'UTF-8'); ?>" method="post">
+                                <input type="hidden" name="owner_id" value="<?php echo htmlspecialchars($_SESSION['user_id'], ENT_QUOTES, 'UTF-8'); ?>">
+                                <input type="hidden" name="project_id" value="<?php echo htmlspecialchars($project['id'], ENT_QUOTES, 'UTF-8'); ?>">
+                                <button type="submit" class="btn noni">
+                                    <?php echo htmlspecialchars($project['name'], ENT_QUOTES, 'UTF-8'); ?> <p style="color: #ffcb7d; display:inline">(Shared)</p>
+                                </button>
+                                </form>
+                                </div>
+                                <div class="column-50">
+                                    
+                                    
+                                
+                                <div class="container"> <div class="skills html" style="width: <?php echo htmlspecialchars($_SESSION['pc'][$project['id']] , ENT_QUOTES, 'UTF-8');?>%;"><?php echo htmlspecialchars($_SESSION['pc'][$project['id']] , ENT_QUOTES, 'UTF-8');?>%</div></div>
+                                </div>
+                                <div class="column-25 ">
+                                    <div class="row">
+                                        <div class="column-50" align="right" >
+                                        </div>
+                                        <div class="column-50" align="center">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            </li>
+                        <?php endforeach; 
+                        unset($_SESSION['projectsC']);
+                        unset($_SESSION['pc']);
+                        ?>
+                    </ul>
+                <?php endif; ?>
             <!-- NO FOUND -->
             <?php else: ?>
                 <p class="greyText">No Project Found ....<br></p>

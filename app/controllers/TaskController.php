@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once __DIR__ . '/../models/Task.php';
 require_once __DIR__ . '/../models/Project.php';
 require_once __DIR__ . '/../../config/config.php';
+require_once __DIR__ . '/../models/Collaboration.php';
 
 class TaskController {
     private $taskModel;
@@ -138,6 +139,12 @@ class TaskController {
         $P= new Project($db)  ;
         $project = $P->getById($id);
         $_SESSION['project'] = $project;
+        $C= new Collaboration($db);
+        $i=$_SESSION['user_id'];
+        $permission=$C->getPermissionByUserProject($i, $id);
+        $_SESSION['permission'] = $permission;
+
+        
     }
 }
 

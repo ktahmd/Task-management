@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="public/assets/css/Links.css">
     <link rel="stylesheet" href="public/assets/css/Error404.css">
     <link rel="stylesheet" href="public/assets/css/Drop.css">
+    <link rel="stylesheet" href="public/assets/css/LiveSearch.css">
 
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
@@ -61,6 +62,9 @@
     <script src="public/assets/js/TableSearch.js"></script>
     <script src="public/assets/js/DragDrop.js"></script>
     <script src="public/assets/js/Drop.js"></script>
+    <script src="public/assets/js/LiveSearch.js"></script>
+    <script src="public/assets/js/Sort.js"></script>
+    <script src="public/assets/js/Filter.js"></script>
 
     
 

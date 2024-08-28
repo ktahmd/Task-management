@@ -3,6 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start(); // Start the session if it's not already started
 }
 require_once __DIR__ . '/../models/Project.php';
+require_once __DIR__ . '/../models/Collaboration.php';
 require_once __DIR__ . '/../models/Task.php';
 require_once __DIR__ . '/../../config/config.php';
 
@@ -117,12 +118,27 @@ class ProjectController {
     public function getAll() {
         if (isset($_SESSION['user_id'])) {
             $userId = $_SESSION['user_id'];
+            global $db;
+            $C= new Collaboration($db);
+            $projectIdColl=$C->getByUser($userId);
+            
+            $pro = [];
+            foreach ($projectIdColl as $p) { 
+                $proN = $this->projectModel->getById($p['project_id']);
+                if ($proN) {  // Check if $proN is not null
+                    $pro[] = [
+                        'id' => $proN['id'],
+                        'name' => $proN['name'],
+                        'description' => $proN['description'],
+                        'owner_id' => $proN['owner_id'],
+                        'created_at' => $proN['created_at']
+                    ];
+                } 
+            }
             $myprojects = $this->projectModel->getByUserId($userId);
             $_SESSION['projects'] = $myprojects;
             
-            global $db;
             $T = new Task($db);
-
             $totals = [];
             $countings = [];
             $percentages = [];
@@ -140,7 +156,25 @@ class ProjectController {
                     $percentages[$projectId] = 0; // ou une autre valeur par défaut
                 }
             }
+            if(!empty($pro)){
+                $_SESSION['projectsC'] = $pro;
+            foreach ($pro as $p) {
+                $proId = $p['id'];
+
+                // Stocker les totaux et les comptes pour chaque projet dans des tableaux associatifs
+                $t[$proId] = $T->Allconting($proId);
+                $cc[$proId] = $T->counting($proId);
+                
+                if ($cc[$proId] > 0) {
+                    $pc[$proId] = ($cc[$proId] * 100) / $t[$proId];
+                } else {
+                    $pc[$proId] = 0; // ou une autre valeur par défaut
+                }
+            }
+            $_SESSION['pc']=$pc;
+            }
             $_SESSION['p']=$percentages;
+            
             
             
         } else {

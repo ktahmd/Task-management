@@ -60,6 +60,15 @@ class User {
             return null;
         }
     }
+    public function getEmailById($userId) {
+        $sql = "SELECT email FROM users WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param('i', $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row['email'];
+    }
 
 }
 ?>

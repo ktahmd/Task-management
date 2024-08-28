@@ -11,7 +11,7 @@
     </div>
     <div class="dropdown" >
     
-    <button  class="dropbtn" ><div class="avatar" onclick="droping()"><?php echo substr($_SESSION['email'], 0, 2);?></div></button>
+    <button  class="dropbtn" onclick="droping()"><div class="avatar" style="pointer-events: none;"><?php echo substr($_SESSION['email'], 0, 2);?></div></button>
     <div id="myDropdown" class="dropdown-content">
         <div class="email" ><?php echo $_SESSION['email'];?> </div>
         

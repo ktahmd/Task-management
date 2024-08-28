@@ -21,14 +21,20 @@ $routes = [
     '/' => '../app/view/Home',
     'MyProject' => '../app/view/project/project_list',
     'Dashbord' => '../app/view/dashbord/Bord',
-    'Project' => '../app/view/task/tasks',
-    "Project-$id" => '../app/view/task/tasks',
     '404' => '../app/view/error/404',
     '403' => '../app/view/error/403',
 ];
 
-// Route handling
-$page = isset($routes[$path]) ? $routes[$path] : '404';
+
+// Check for dynamic routes
+if ($path === 'ProjectSetting' && $id !== null) {
+    $page = '../app/view/collaborations/collsetting';
+} elseif ($path === 'Project' && $id !== null) {
+    $page = '../app/view/task/tasks';
+} else {
+    // Fallback to static routes or 404
+    $page = isset($routes[$path]) ? $routes[$path] : '../app/view/error/404';
+}
 
 
 // echo "Page: $page<br>";

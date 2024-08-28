@@ -1,0 +1,17 @@
+#results{
+
+    margin-left: auto;  /* Push to the far right */
+    display: block;
+    position: absolute;
+    background-color: #f2f2f2;
+    width: 50%;
+    max-height: 70px;
+    overflow: auto;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.16);
+    
+    padding-left: 10px;
+    margin-top: -15px;
+}
+#results div{
+    padding-bottom: 5px;
+}
