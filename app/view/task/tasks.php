@@ -143,7 +143,7 @@ ob_start(); /*start buffering the output*/
                 <tr>
                     <td><?php echo htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8'); ?> </td>
                     <td class="greyText"><?php echo htmlspecialchars($task['description'], ENT_QUOTES, 'UTF-8'); ?> </td>
-                    <td style="color: red;"><?php echo htmlspecialchars($task['priority'], ENT_QUOTES, 'UTF-8'); ?> </td>
+                    <td ><?php echo htmlspecialchars($task['priority'], ENT_QUOTES, 'UTF-8'); ?> </td>
                     <td><?php echo explode(' ', htmlspecialchars($task['created_at'], ENT_QUOTES, 'UTF-8'))[0]; ?> </td>
                     <td><?php echo htmlspecialchars($task['due_date'], ENT_QUOTES, 'UTF-8'); ?> </td>
                     <td><?php echo htmlspecialchars($task['status'], ENT_QUOTES, 'UTF-8'); ?> </td>

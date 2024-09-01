@@ -41,3 +41,4 @@ CREATE TABLE collaborations (
     FOREIGN KEY (project_id) REFERENCES projects(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+

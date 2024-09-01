@@ -1,19 +1,19 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
-    session_start(); // Start the session if it's not already started
+    session_start();
 }
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../../config/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sanitize input
     $email = isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8') : '';
-    $password = isset($_POST['password']) ? htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8') : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-    $user = new User($db);  
+
+    $user = new User($db);
 
     try {
-        $user_data = $user->getByEmail($email);  
+        $user_data = $user->getByEmail($email);
 
         if ($user_data) {
             $hashed_password = $user_data['password'];
@@ -24,15 +24,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: ../../Dashbord");
                 exit();
             } else {
-                echo "<p class='error'>Mot de passe incorrect.</p>";
+                $_SESSION['passusermsg'] = "Incorrect password.";
+                header("Location: ../../Home");
+                exit();
             }
         } else {
-            echo "<p class='error'>Utilisateur non trouvé.</p>";
+            $_SESSION['usermsg'] = "User not found.";
+            header("Location: ../../Home");
+            exit();
         }
     } catch (Exception $e) {
-        echo "<p class='error'>Erreur : " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8') . "</p>";
+        $_SESSION['general_error'] = "Error: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
+        header("Location: ../../Home");
+        exit();
     }
 
     $db->close();
 }
+
 ?>

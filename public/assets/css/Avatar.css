@@ -13,6 +13,16 @@
     margin-left: auto;
     
   }
+
+  .bigavatar {
+    width: 150px;
+    height: 150px;
+    background-color: #ffffff;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    
+  }
   
 
 

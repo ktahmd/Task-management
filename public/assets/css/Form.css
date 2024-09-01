@@ -1,5 +1,5 @@
 /* Style inputs with type="text", select elements and textareas */
-input[type=text], input[type=date], select, textarea {
+input[type=text], input[type=date], input[type=email],input[type=password], select, textarea {
     width: 100%; /* Full width */
     padding: 12px; /* Some padding */ 
     border: 1px solid #b9b9b9; /* Gray border */
@@ -26,3 +26,33 @@ input[type=text], input[type=date], select, textarea {
     background-color: #7be0de;
   }
   
+  #message {
+    display:none;
+    color: #000;
+    position: relative;
+    padding-left: 20px;
+    text-align: left;
+  }
+  
+  #message p {
+    font-size: 10px;
+  }
+  
+  /* Add a green text color and a checkmark when the requirements are right */
+  .valid {
+    color: green;
+  }
+  
+
+  
+  /* Add a red text color and an "x" icon when the requirements are wrong */
+  .invalid {
+    color: red;
+  }
+
+  #mssg{
+    color: #ff0000;
+    padding-left: 20px;
+    text-align: left;
+    font-size: 10px;
+  }

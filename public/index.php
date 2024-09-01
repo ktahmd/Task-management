@@ -18,6 +18,7 @@ $id = isset($urlParts[1]) ? $urlParts[1] : null;
 // Define routes
 $routes = [
     'Home' => '../app/view/Home',
+
     '/' => '../app/view/Home',
     'MyProject' => '../app/view/project/project_list',
     'Dashbord' => '../app/view/dashbord/Bord',

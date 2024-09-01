@@ -85,6 +85,12 @@ class ProjectController {
                         foreach($tasks as $task){
                             $T->delete($task['id']);
                         }
+                        
+                        $U=new Collaboration($db);
+                        $collaborations=$U->getByProject($projectId);
+                        foreach($collaborations as $collaboration){
+                            $U->delete($collaboration['id']);
+                        }
                         $this->projectModel->delete($projectId);
                         $_SESSION['msg_type'] = "success";
                         $_SESSION['msg'] = "Project deleted successfully!";
@@ -151,7 +157,7 @@ class ProjectController {
                 $countings[$projectId] = $T->counting($projectId);
                 
                 if ($countings[$projectId] > 0) {
-                    $percentages[$projectId] = ($countings[$projectId] * 100) / $totals[$projectId];
+                    $percentages[$projectId] = (int)(($countings[$projectId] * 100) / $totals[$projectId]);
                 } else {
                     $percentages[$projectId] = 0; // ou une autre valeur par défaut
                 }
@@ -166,7 +172,7 @@ class ProjectController {
                 $cc[$proId] = $T->counting($proId);
                 
                 if ($cc[$proId] > 0) {
-                    $pc[$proId] = ($cc[$proId] * 100) / $t[$proId];
+                    $pc[$proId] = (int)(($cc[$proId] * 100) / $t[$proId]);
                 } else {
                     $pc[$proId] = 0; // ou une autre valeur par défaut
                 }
